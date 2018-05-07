@@ -1,7 +1,7 @@
 Physical Gradient Descent
 =========================
 
-This fork is an update over, well thought [Physical Gradient Descent repository](https://github.com/chrisfosterelli/physical-gradient-descent) from [Chris Foster's blog post](https://fosterelli.co/executing-gradient-descent-on-the-earth).
+This repository is based on well thought [Physical Gradient Descent repository](https://github.com/chrisfosterelli/physical-gradient-descent) from [Chris Foster's blog post](https://fosterelli.co/executing-gradient-descent-on-the-earth).
 
 Thought it was pretty neat, and wanted to see how other Hill climbing algorithms would fare with each other in literally real world use case. While doing that, refactored the code for my better understanding.
 
@@ -9,7 +9,7 @@ Unfortunately, real world geography is not a good test case for gradient **desce
 
 Luckly, this can be easily solved by turning the world inside out and turning it into a great problem for finding global/local minima or just reversing the loss and turning the algorithms adapt for finding the global/local maxima. (**TODO: Turn the algorithms for gradient ascent/ hill climbing!**)
 
-Below you can find the original readme. All of it is applicable for this repository as well.
+Below you can find the original readme by Chris Foster. All of it is applicable for this repository as well.
 
 ---
 
