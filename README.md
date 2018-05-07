@@ -1,4 +1,4 @@
-Physical Gradient Descent
+Hill Climbing IRL
 =========================
 
 This repository is based on well thought [Physical Gradient Descent repository](https://github.com/chrisfosterelli/physical-gradient-descent) from [Chris Foster's blog post](https://fosterelli.co/executing-gradient-descent-on-the-earth).
