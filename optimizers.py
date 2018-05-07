@@ -1,44 +1,49 @@
 import numpy as np
 import rasterio
 
-map_step = .001
+map_step = .01
 
 
 class RasterMap(object):
     def __init__(self, tif_file):
         self.src = rasterio.open(tif_file)
-        self.band = self.src.read(1)
+
+        # not interested in values smaller than 0
+        band = self.src.read(1)
+        band[band <= 0] = 0
+
+        self.band = band
+        self.max_val = np.max(band)
 
     def get_elevation(self, lat, lon):
         vals = self.src.index(lon, lat)
         return self.band[vals]
 
-    def compute_cost(self, theta):
-        lat, lon = theta[0], theta[1]
-        j = self.get_elevation(lat, lon)
-
-        return j
+    def get_cost(self, lat, lon):
+        # purposefuly inversing the terrain for hill climb / gradient ascent
+        return self.get_elevation(lat, lon) * -1 + self.max_val
 
 
 def calculate_gradient(rmap, theta, j_history, n_iter):
     try:
-        cost = rmap.compute_cost(theta)
+        cost = rmap.get_cost(*theta)
+        elevation = rmap.get_elevation(*theta)
 
-        step_north = rmap.get_elevation(theta[0] + map_step, theta[1])
-        step_south = rmap.get_elevation(theta[0] - map_step, theta[1])
-        step_east = rmap.get_elevation(theta[0], theta[1] + map_step)
-        step_west = rmap.get_elevation(theta[0], theta[1] - map_step)
+        step_north = rmap.get_cost(theta[0] + map_step, theta[1])
+        step_south = rmap.get_cost(theta[0] - map_step, theta[1])
+        step_east = rmap.get_cost(theta[0], theta[1] + map_step)
+        step_west = rmap.get_cost(theta[0], theta[1] - map_step)
     except IndexError:
         print('The boundary of elevation map has been reached')
         return None
 
-    j_history[n_iter] = [max(0, cost), theta[0], theta[1]]
+    j_history[n_iter] = [elevation, theta[0], theta[1]]
     if cost <= 0:
         return None
 
     lat_slope = step_north / step_south - 1
     lon_slope = step_east / step_west - 1
-    print(f'Elevation at {theta} is {cost}')
+    print(f'Elevation at {theta} is {elevation}')
 
     return np.array((lat_slope, lon_slope))
 
