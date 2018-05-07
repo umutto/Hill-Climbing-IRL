@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Gradient Descent Visualizer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js">
+  </script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100%;
+    }
+
+    #legend {
+      font-family: Roboto, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 1);
+      padding: 15px;
+      border-radius: 1px;
+      margin: 10px;
+    }
+
+    #legend h4 {
+      margin: 0;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map">
+  </div>
+  <div id="legend">
+    <h4>Hill Climbing Algorithms</h4>
+    <hr>
+  </div>
+  <script>
+    function initMap() {
+      a = 2
+      const mapEl = document.getElementById('map')
+      axios.get('params.json').then(resp => {
+        args = resp.data
+        const map = new google.maps.Map(mapEl, {
+          zoom: 9,
+          center: args.center,
+          mapTypeId: 'terrain'
+        })
+        axios
+          .get('outputs/').then(resp => {
+            var legend = document.getElementById('legend');
+
+            map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+            resp.data.match(/href="([^"]*)/g)
+              .forEach(element => {
+                file = 'outputs/' + element.slice(6)
+
+                axios
+                  .get(file)
+                  .then(resp => {
+                    var csv = resp.data
+                    line_color = resp.data.split('\n')[0]
+
+                    var div = document.createElement('div');
+                    var legend_icon = document.createElement('span');
+                    var legend_text = document.createElement('span');
+                    legend_icon.innerHTML = "&#9673; "
+                    legend_icon.style.color = line_color
+                    legend_text.innerHTML = element.slice(6, -4).replace('%20', ' ')
+                    div.appendChild(legend_icon)
+                    div.appendChild(legend_text)
+                    legend.appendChild(div);
+
+                    var coordinates = csv
+                      .split('\n')
+                      .slice(1, -1)
+                      .map(coord => ({
+                        lat: parseFloat(coord.split(',')[0]),
+                        lng: parseFloat(coord.split(',')[1])
+                      }))
+
+                    var path = new google.maps.Polyline({
+                      path: coordinates,
+                      geodesic: true,
+                      strokeColor: line_color,
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2
+                    })
+
+                    path.setMap(map)
+
+                    var icon = {
+                      path: google.maps.SymbolPath.CIRCLE,
+                      strokeColor: 'white',
+                      fillColor: line_color,
+                      fillOpacity: 0.4,
+                      scale: 4.5,
+                      strokeWeight: 1
+                    }
+
+                    let time = 0
+                    const step = 100
+                    const marker = new google.maps.Marker({ map, icon })
+
+                    setInterval(() => {
+                      if (time > step * coordinates.length) time = 0
+                      else marker.setPosition(coordinates[time / step])
+                      time += step
+                    }, step)
+
+                  })
+              });
+          })
+      })
+
+
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfgJ5eTO0Rv2A--epCTm_F2xFONR4V9ew&callback=initMap">
+  </script>
+</body>
+
+</html>
