@@ -1,0 +1,9 @@
+{
+    "center": {
+        "lat": 47.801686,
+        "lng": -123.709083
+    },
+    "output": "outputs/",
+    "iters": 1000,
+    "tif": "tifs/srtm_12_03.tif"
+}
