@@ -13,6 +13,9 @@ In this repository, I've experimented with climbing the mountain my university s
 
 To run the code, below you can find the original readme by Chris Foster. All of it is applicable for this repository as well.
 
+Example output of common gradient descent algorithms:
+![Hill Climbing From Bostanci](https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif)
+
 ---
 
 This is code for adapting the gradient descent algorithm to run on earth's 
