@@ -50,7 +50,7 @@
       axios.get('params.json').then(resp => {
         args = resp.data
         const map = new google.maps.Map(mapEl, {
-          zoom: 9,
+          zoom: 11,
           center: args.center,
           mapTypeId: 'terrain'
         })

@@ -1,7 +1,7 @@
 import numpy as np
 import rasterio
 
-map_step = .01
+map_step = .005
 
 
 class RasterMap(object):
@@ -21,6 +21,8 @@ class RasterMap(object):
 
     def get_cost(self, lat, lon):
         # purposefuly inversing the terrain for hill climb / gradient ascent
+        # inversing terrain is easier than working with inversing the gradient
+        # or changing algorithms individually.
         return self.get_elevation(lat, lon) * -1 + self.max_val
 
 
