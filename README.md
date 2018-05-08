@@ -15,7 +15,7 @@ To run the code, below you can find the original readme by Chris Foster. All of 
   
    
 <p align="center">
-  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"/>  
+  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
   </br>
   <sup><i>Example output of common gradient descent algorithms:</i></sup>
 </p>  
