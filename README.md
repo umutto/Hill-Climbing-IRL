@@ -3,13 +3,15 @@ Hill Climbing IRL
 
 This repository is based on well thought [Physical Gradient Descent repository](https://github.com/chrisfosterelli/physical-gradient-descent) from [Chris Foster's blog post](https://fosterelli.co/executing-gradient-descent-on-the-earth).
 
-Thought it was pretty neat, and wanted to see how other Hill climbing algorithms would fare with each other in literally real world use case. While doing that, refactored the code for my better understanding.
+Thought it was pretty neat, and wanted to see how other Hill climbing algorithms would fare with each other in a real world (literally) use case. While doing that, refactored the code for my better understanding.
 
 Unfortunately, real world geography is not a good test case for gradient **descent** kind of algorithms since the aim of reaching ocean is very easy to do (just have bigger steps.). Meanwhile hill climbing or gradient ascent fits perfectly.
 
-Luckly, this can be easily solved by turning the world inside out and turning it into a great problem for finding global/local minima or just reversing the loss and turning the algorithms adapt for finding the global/local maxima. (**TODO: Turn the algorithms for gradient ascent/ hill climbing!**)
+Luckly, this can be easily solved by turning the world inside out, thus turning it into a great problem for finding global/local minima or just reversing the loss / slope and changing the algorithms adapt for finding the global/local maxima. Inversing the world was the easiest, so I've done that.
 
-Below you can find the original readme by Chris Foster. All of it is applicable for this repository as well.
+In this repository, I've experimented with climbing the mountain my university sits on from a nearby seaside. It works pretty well and can see interesting paths from different algorithms (like mostly momentum based algorithms overshooting at first).
+
+To run the code, below you can find the original readme by Chris Foster. All of it is applicable for this repository as well.
 
 ---
 
