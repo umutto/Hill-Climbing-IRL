@@ -12,9 +12,12 @@ Luckly, this can be easily solved by turning the world inside out, thus turning 
 In this repository, I've experimented with climbing the mountain my university sits on from a nearby seaside. It works pretty well and can see interesting paths from different algorithms (like mostly momentum based algorithms overshooting at first).
 
 To run the code, below you can find the original readme by Chris Foster. All of it is applicable for this repository as well.
-
-*Example output of common gradient descent algorithms:*  
-![Hill Climbing From Bostanci](https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif)
+  
+   
+<p align="center">
+  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"/>  
+  <small><i>Example output of common gradient descent algorithms:</i></small>
+</p>  
 
 ---
 
