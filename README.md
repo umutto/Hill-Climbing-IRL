@@ -20,9 +20,10 @@ To run the code, below you can find the original readme by Chris Foster. All of 
   <sup><i>Example output of common gradient descent algorithms:</i></sup>
 </p>  
 
+
+**You can follow the original instructions from Chris Foster below, it should work for this repository as well.**  
 ---
 
-### You can follow the original instructions from Chris Foster below, it should work for this repository as well.
 
 This is code for adapting the gradient descent algorithm to run on earth's 
 actual geometry. You can read more about this in the attached [blog post].
