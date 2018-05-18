@@ -21,7 +21,7 @@ To run the code, below you can find the original readme by Chris Foster. All of 
 </p>  
 
 
-**You can follow the original instructions from Chris Foster below, it should work for this repository as well.**  
+#### You can follow the original instructions from Chris Foster below, it should work for this repository as well.  
 ---
 
 
