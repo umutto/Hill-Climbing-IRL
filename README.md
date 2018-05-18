@@ -15,16 +15,16 @@ In this repository, I've experimented with climbing the mountain my university s
 
 ```json
 {
-    "_comment": "Starting coordinates"
+    "_comment": "Starting coordinates",
     "center": {
         "lat": 40.953845,
         "lng": 29.095831
     },
-    "_comment": "output path for the CSV files, if changed need to change visualizer.html too"
+    "_comment": "output path for the CSV files, if changed need to change visualizer.html too",
     "output": "outputs/",
-    "_comment": "number of steps to take"
+    "_comment": "number of steps to take",
     "iters": 500,
-    "_comment": "elevation map from SRTM Tile Grabber"
+    "_comment": "elevation map from SRTM Tile Grabber",
     "tif": "tifs/srtm_42_04.tif"
 }
 ```
