@@ -11,9 +11,46 @@ Luckly, this can be easily solved by turning the world inside out, thus turning 
 
 In this repository, I've experimented with climbing the mountain my university sits on from a nearby seaside. It works pretty well and can see interesting paths from different algorithms (like mostly momentum based algorithms overshooting at first).
 
-To run the code, below you can find the original readme by Chris Foster. All of it is applicable for this repository as well.
-  
-   
+#### You can change the starting location from `params.json`
+
+```json
+{
+    "_comment": "Starting coordinates",
+    "center": {
+        "lat": 40.953845,
+        "lng": 29.095831
+    },
+    "_comment": "output path for the CSV files, if changed need to change visualizer.html too",
+    "output": "outputs/",
+    "_comment": "number of steps to take",
+    "iters": 500,
+    "_comment": "elevation map from SRTM Tile Grabber",
+    "tif": "tifs/srtm_42_04.tif"
+}
+```
+#### If you only want some of the algorithms visualized, or want a different color scheme, you can edit the `methods` dictionary in `run.py`
+
+```python
+"""
+fun: function
+  Function reference for the algorithm used, gets a custom RasterMap object, start coordinates and hyperparameters
+color: string
+  Color to use for visualization.
+"""
+methods = {
+    'Gradient Descent': {'fun': gradient_descent, 'color': '#FF0000'},
+    'Momentum': {'fun': gradient_descent_w_momentum, 'color': '#009933'},
+    'NAG': {'fun': gradient_descent_w_nesterov, 'color': '#9900FF'},
+    'Adagrad': {'fun': adagrad, 'color': '#0066FF'},
+    'RMSprop': {'fun': RMSprop, 'color': '#000000'},
+    'Adam': {'fun': adam, 'color': '#FFFF00'}
+}
+```
+
+*If you want to add new optimizer algorithms, you can add function reference with a similar signature to methods dictionary.*
+
+## Results:
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
   </br>
