@@ -15,13 +15,17 @@ In this repository, I've experimented with climbing the mountain my university s
 
 ```json
 {
-    "center": {                   # Starting coordinates
+    "_comment": "Starting coordinates"
+    "center": {
         "lat": 40.953845,
         "lng": 29.095831
     },
-    "output": "outputs/",         # output path for the CSV files, if changed need to change visualizer.html too
-    "iters": 500,                 # number of steps to take
-    "tif": "tifs/srtm_42_04.tif"  # elevation map from SRTM Tile Grabber
+    "_comment": "output path for the CSV files, if changed need to change visualizer.html too"
+    "output": "outputs/",
+    "_comment": "number of steps to take"
+    "iters": 500,
+    "_comment": "elevation map from SRTM Tile Grabber"
+    "tif": "tifs/srtm_42_04.tif"
 }
 ```
 #### If you only want some of the algorithms visualized, or want a different color scheme, you can edit the `methods` dictionary in `run.py`
