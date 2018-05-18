@@ -49,7 +49,8 @@ methods = {
 
 *If you want to add new optimizer algorithms, you can add function reference with a similar signature to methods dictionary.*
 
-   
+## Results:
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
   </br>
