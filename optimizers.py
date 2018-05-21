@@ -1,36 +1,10 @@
 import numpy as np
-import rasterio
 
 map_step = .005
 
 
-class RasterMap(object):
-    def __init__(self, tif_file):
-        self.src = rasterio.open(tif_file)
-
-        # not interested in values smaller than 0
-        band = self.src.read(1)
-        band[band <= 0] = 0
-
-        self.band = band
-        self.max_val = np.max(band)
-
-    def get_elevation(self, lat, lon):
-        vals = self.src.index(lon, lat)
-        return self.band[vals]
-
-    def get_cost(self, lat, lon):
-        # purposefuly inversing the terrain for hill climb / gradient ascent
-        # inversing terrain is easier than working with inversing the gradient
-        # or changing algorithms individually.
-        return self.get_elevation(lat, lon) * -1 + self.max_val
-
-
-def calculate_gradient(rmap, theta, j_history, n_iter):
+def get_possible_steps(rmap, theta):
     try:
-        cost = rmap.get_cost(*theta)
-        elevation = rmap.get_elevation(*theta)
-
         step_north = rmap.get_cost(theta[0] + map_step, theta[1])
         step_south = rmap.get_cost(theta[0] - map_step, theta[1])
         step_east = rmap.get_cost(theta[0], theta[1] + map_step)
@@ -39,12 +13,21 @@ def calculate_gradient(rmap, theta, j_history, n_iter):
         print('The boundary of elevation map has been reached')
         return None
 
+    return step_north, step_east, step_south, step_west
+
+
+def calculate_gradient(rmap, theta, j_history, n_iter):
+    cost = rmap.get_cost(*theta)
+    elevation = rmap.get_elevation(*theta)
     j_history[n_iter] = [elevation, theta[0], theta[1]]
-    if cost <= 0:
+
+    steps = get_possible_steps(rmap, theta)
+
+    if cost <= 0 or steps is None:
         return None
 
-    lat_slope = step_north / step_south - 1
-    lon_slope = step_east / step_west - 1
+    lat_slope = steps[0] / steps[2] - 1
+    lon_slope = steps[1] / steps[3] - 1
     print(f'Elevation at {theta} is {elevation}')
 
     return np.array((lat_slope, lon_slope))

@@ -22,7 +22,7 @@ In this repository, I've experimented with climbing the mountain my university s
     },
     "_comment": "output path for the CSV files, if changed need to change visualizer.html too",
     "output": "outputs/",
-    "_comment": "number of steps to take",
+    "_comment": "number of steps to take until convergence",
     "iters": 500,
     "_comment": "elevation map from SRTM Tile Grabber",
     "tif": "tifs/srtm_42_04.tif"
@@ -54,7 +54,7 @@ methods = {
 <p align="center">
   <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
   </br>
-  <sup><i>Example output of common gradient descent algorithms:</i></sup>
+  <sup><i>Example output of common gradient descent algorithms.</i></sup>
 </p>  
 
 
