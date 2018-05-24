@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-from optimizers import RasterMap
+from rastermap import RasterMap
 from optimizers import (gradient_descent, gradient_descent_w_momentum,
                         gradient_descent_w_nesterov, adagrad, RMSprop, adam)
 
