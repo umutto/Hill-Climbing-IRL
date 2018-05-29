@@ -1,14 +1,17 @@
+import random
 import numpy as np
 
-map_step = .005
+
+def get_step_costs(rmap, steps):
+    return [rmap.get_cost(*s) for s in steps]
 
 
-def get_possible_steps(rmap, theta):
+def get_possible_steps(theta, step_size=.005):
     try:
-        step_north = rmap.get_cost(theta[0] + map_step, theta[1])
-        step_south = rmap.get_cost(theta[0] - map_step, theta[1])
-        step_east = rmap.get_cost(theta[0], theta[1] + map_step)
-        step_west = rmap.get_cost(theta[0], theta[1] - map_step)
+        step_north = (theta[0] + step_size, theta[1])
+        step_south = (theta[0] - step_size, theta[1])
+        step_east = (theta[0], theta[1] + step_size)
+        step_west = (theta[0], theta[1] - step_size)
     except IndexError:
         print('The boundary of elevation map has been reached')
         return None
@@ -21,13 +24,13 @@ def calculate_gradient(rmap, theta, j_history, n_iter):
     elevation = rmap.get_elevation(*theta)
     j_history[n_iter] = [elevation, theta[0], theta[1]]
 
-    steps = get_possible_steps(rmap, theta)
+    step_costs = get_step_costs(rmap, get_possible_steps(theta))
 
-    if cost <= 0 or steps is None:
+    if cost <= 0 or step_costs is None:
         return None
 
-    lat_slope = steps[0] / steps[2] - 1
-    lon_slope = steps[1] / steps[3] - 1
+    lat_slope = step_costs[0] / step_costs[2] - 1
+    lon_slope = step_costs[1] / step_costs[3] - 1
     print(f'Elevation at {theta} is {elevation}')
 
     return np.array((lat_slope, lon_slope))
@@ -156,8 +159,40 @@ def genetic_alg(map, theta):
     pass
 
 
-def simulated_annealing(map, theta):
-    pass
+def simulated_annealing(map, theta, alpha=.99, temp=1,
+                        min_temp=1e-6, num_iters=10000):
+    cost = map.get_cost(*theta)
+    j_history = np.zeros(shape=(num_iters, 3))
+    j_history[0] = [map.get_elevation(*theta), theta[0], theta[1]]
+
+    def prob(c, n_c, t):
+        p = np.e**((c - n_c) / t)
+        if p >= np.random.random():
+            return True
+        return False
+
+    for i in range(1, num_iters):
+        if temp < min_temp:
+            break
+
+        for j in range(50):
+            steps = get_possible_steps(theta)
+            step_costs = get_step_costs(map, steps)
+
+            step, step_cost = random.choice(list(zip(steps, step_costs)))
+            if prob(cost, step_cost, temp):
+                theta = step
+                cost = step_cost
+
+        elevation = map.get_elevation(*theta)
+        j_history[i] = [elevation, theta[0], theta[1]]
+
+        print(f'Elevation at {theta} is {elevation}')
+        print(f'({i}/{num_iters}): Update is {theta}')
+
+        temp *= alpha
+
+    return theta, j_history[:i]
 
 
 def stochastic_hill_climb(map, theta):

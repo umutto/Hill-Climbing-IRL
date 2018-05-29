@@ -1,3 +1,4 @@
+import os
 import json
 import csv
 
@@ -8,7 +9,8 @@ plt.style.use('ggplot')
 
 from rastermap import RasterMap
 from optimizers import (gradient_descent, gradient_descent_w_momentum,
-                        gradient_descent_w_nesterov, adagrad, RMSprop, adam)
+                        gradient_descent_w_nesterov, adagrad, RMSprop, adam,
+                        simulated_annealing)
 
 args = json.load(open('params.json'))
 
@@ -20,8 +22,13 @@ methods = {
     'NAG': {'fun': gradient_descent_w_nesterov, 'color': '#9900FF'},
     'Adagrad': {'fun': adagrad, 'color': '#0066FF'},
     'RMSprop': {'fun': RMSprop, 'color': '#000000'},
-    'Adam': {'fun': adam, 'color': '#FFFF00'}
+    'Adam': {'fun': adam, 'color': '#FFFF00'},
+    'Simulated Annealing': {'fun': simulated_annealing, 'color': '#ED7504'}
 }
+
+# clean before running the experiment
+for csv_file in os.listdir('outputs/'):
+    os.remove(f'outputs/{csv_file}')
 
 for k, v in methods.items():
     theta, j_history = v['fun'](current_map, np.array([args['center']['lat'],
