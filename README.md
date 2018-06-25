@@ -38,18 +38,27 @@ color: string
   Color to use for visualization.
 """
 methods = {
-    'Gradient Descent': {'fun': gradient_descent, 'color': '#FF0000'},
-    'Momentum': {'fun': gradient_descent_w_momentum, 'color': '#009933'},
-    'NAG': {'fun': gradient_descent_w_nesterov, 'color': '#9900FF'},
-    'Adagrad': {'fun': adagrad, 'color': '#0066FF'},
-    'RMSprop': {'fun': RMSprop, 'color': '#000000'},
-    'Adam': {'fun': adam, 'color': '#FFFF00'}
+    'Gradient Descent': {'fun': opt.gradient_descent, 'color': '#FF0000'},
+    'Momentum': {'fun': opt.gradient_descent_w_momentum, 'color': '#009933'},
+    'NAG': {'fun': opt.gradient_descent_w_nesterov, 'color': '#9900FF'},
+    'Adagrad': {'fun': opt.adagrad, 'color': '#0066FF'},
+    'RMSprop': {'fun': opt.RMSprop, 'color': '#000000'},
+    'Adam': {'fun': opt.adam, 'color': '#FFFF00'},
+    'Simulated Annealing': {'fun': opt.simulated_annealing, 'color': '#ED7504'},
+    'Stochastic Hill Climb': {'fun': opt.stochastic_hill_climb, 'color': '#F442C5'},
+    'Tabu Search': {'fun': opt.tabu_search, 'color': '#56FCFF'}
 }
 ```
 
 *If you want to add new optimizer algorithms, you can add function reference with a similar signature to methods dictionary.*
 
 ## Results:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/Cost_Plot.png" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
+  </br>
+  <sup><i>Cost plot of common gradient descent algorithms.</i></sup>
+</p>  
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/src/srtm_42_04.gif" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
