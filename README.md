@@ -55,7 +55,7 @@ methods = {
 ## Results:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/Cost_Plot.png" alt="Hill Climbing From Bostanci"  height="600" width="600"/>  
+  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/Cost_Plot.png" alt="Hill Climbing From Bostanci"  height="400" width="600"/>  
   </br>
   <sup><i>Cost plot of common gradient descent algorithms.</i></sup>
 </p>  
