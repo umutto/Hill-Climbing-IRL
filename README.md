@@ -55,9 +55,9 @@ methods = {
 ## Results:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/Cost_Plot.png" alt="Hill Climbing From Bostanci"  height="400"/>  
+  <img src="https://raw.githubusercontent.com/umutto/Hill-Climbing-IRL/master/Cost_Plot.png" alt="Hill Climbing From Bostanci"  width="600"/>  
   </br>
-  <sup><i>Cost plot of common gradient descent algorithms.</i></sup>
+  <sup><i>Cost per itration plot for common gradient descent algorithms.</i></sup>
 </p>  
 
 <p align="center">
