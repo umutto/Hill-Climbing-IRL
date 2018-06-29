@@ -164,43 +164,6 @@ def adam(rmap, theta, alpha=.001, epsilon=1e-8, beta1=.9,
     return theta, j_history[:i]
 
 
-def simulated_annealing(rmap, theta, alpha=.99, temp=1,
-                        min_temp=1e-6, num_iters=10000):
-    cost = rmap.get_cost(*theta)
-    elevation = rmap.get_elevation(*theta)
-    j_history = np.zeros(shape=(num_iters, 3))
-    j_history[0] = [elevation, theta[0], theta[1]]
-
-    def prob(c, n_c, t):
-        p = np.e**((c - n_c) / t)
-        if p >= np.random.random():
-            return True
-        return False
-
-    for i in range(1, num_iters):
-        if temp < min_temp:
-            break
-
-        steps = get_possible_steps(theta)
-        step_costs = get_step_costs(rmap, steps)
-        for j in range(50):
-
-            step, step_cost = random.choice(list(zip(steps, step_costs)))
-            if prob(cost, step_cost, temp):
-                theta = step
-                cost = step_cost
-
-        elevation = rmap.get_elevation(*theta)
-        j_history[i] = [elevation, theta[0], theta[1]]
-
-        print(f'Elevation at {theta} is {elevation}')
-        print(f'({i}/{num_iters}): Update is {theta}')
-
-        temp *= alpha
-
-    return theta, j_history[:i]
-
-
 def stochastic_hill_climb(rmap, theta, num_iters=10000):
     cost = rmap.get_cost(*theta)
     elevation = rmap.get_elevation(*theta)
@@ -259,6 +222,43 @@ def tabu_search(rmap, theta, tabu_size=10, num_iters=10000):
         print(f'({i}/{num_iters}): Update is {best_t}')
 
     return best_t, j_history[:i]
+
+
+def simulated_annealing(rmap, theta, alpha=.99, temp=1,
+                        min_temp=1e-6, num_iters=10000):
+    cost = rmap.get_cost(*theta)
+    elevation = rmap.get_elevation(*theta)
+    j_history = np.zeros(shape=(num_iters, 3))
+    j_history[0] = [elevation, theta[0], theta[1]]
+
+    def prob(c, n_c, t):
+        p = np.e**((c - n_c) / t)
+        if p >= np.random.random():
+            return True
+        return False
+
+    for i in range(1, num_iters):
+        if temp < min_temp:
+            break
+
+        steps = get_possible_steps(theta)
+        step_costs = get_step_costs(rmap, steps)
+        for j in range(50):
+
+            step, step_cost = random.choice(list(zip(steps, step_costs)))
+            if prob(cost, step_cost, temp):
+                theta = step
+                cost = step_cost
+
+        elevation = rmap.get_elevation(*theta)
+        j_history[i] = [elevation, theta[0], theta[1]]
+
+        print(f'Elevation at {theta} is {elevation}')
+        print(f'({i}/{num_iters}): Update is {theta}')
+
+        temp *= alpha
+
+    return theta, j_history[:i]
 
 
 def genetic_alg(rmap, theta):

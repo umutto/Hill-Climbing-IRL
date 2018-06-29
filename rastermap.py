@@ -19,6 +19,6 @@ class RasterMap(object):
 
     def get_cost(self, lat, lon):
         # purposefuly inversing the terrain for hill climb / gradient ascent
-        # inversing terrain is easier than working with inversing the gradient
-        # or changing algorithms individually.
+        # inversing terrain is easier than inversing the gradients and
+        # changing algorithms individually.
         return self.get_elevation(lat, lon) * -1 + self.max_val
